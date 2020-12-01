@@ -1,32 +1,34 @@
 <template>
-  <base-dialog v-if="inputIsInvalid" title="Invalid Input" @close="confirmError">
-    <template #default>
-      <p>Unfortunately, at least one input value is invalid</p>
-      <p>Please, check all inputs and make sure your enter at least a few characters into each input field</p>
-    </template>
-    <template #actions>
-      <base-button @click="confirmError">Okay</base-button>
-    </template>
-  </base-dialog>
-  <base-card>
-    <form @submit.prevent="submitData">
-      <div class="form-control">
-        <label for="title">Title</label>
-        <input id="title" name="title" type="text" ref="titleInput" />
-      </div>
-      <div class="form-control">
-        <label for="description">Description</label>
-        <textarea id="description" name="description" rows="3" ref="descInput"></textarea>
-      </div>
-      <div class="form-control">
-        <label for="link">Link</label>
-        <input id="link" name="link" type="url" ref="linkInput" />
-      </div>
-      <div>
-        <base-button type="submit">Add Resource</base-button>
-      </div>
-    </form>
-  </base-card>
+  <teleport to="body">
+    <base-dialog v-if="inputIsInvalid" title="Invalid Input" @close="confirmError">
+      <template #default>
+        <p>Unfortunately, at least one input value is invalid</p>
+        <p>Please, check all inputs and make sure your enter at least a few characters into each input field</p>
+      </template>
+      <template #actions>
+        <base-button @click="confirmError">Okay</base-button>
+      </template>
+    </base-dialog>
+    <base-card>
+      <form @submit.prevent="submitData">
+        <div class="form-control">
+          <label for="title">Title</label>
+          <input id="title" name="title" type="text" ref="titleInput" />
+        </div>
+        <div class="form-control">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" rows="3" ref="descInput"></textarea>
+        </div>
+        <div class="form-control">
+          <label for="link">Link</label>
+          <input id="link" name="link" type="url" ref="linkInput" />
+        </div>
+        <div>
+          <base-button type="submit">Add Resource</base-button>
+        </div>
+      </form>
+    </base-card>
+  </teleport>
 </template>
 
 <script>
@@ -35,7 +37,7 @@ export default {
   data() {
     return {
       inputIsInvalid: false
-    }
+    };
   },
   methods: {
     submitData() {
@@ -43,7 +45,7 @@ export default {
       const enteredDescription = this.$refs.descInput.value;
       const enteredUrl = this.$refs.linkInput.value;
 
-      if ( enteredTitle.trim() === '' || enteredDescription.trim() === '' || enteredUrl.trim() === '') {
+      if (enteredTitle.trim() === '' || enteredDescription.trim() === '' || enteredUrl.trim() === '') {
         this.inputIsInvalid = true;
         return;
       }
@@ -52,7 +54,7 @@ export default {
     confirmError() {
       this.inputIsInvalid = false;
     }
-  },
+  }
 };
 </script>
 
